@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History · FaceAnalyzer AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="brand-dot"></div>
+            <span>FaceAnalyzer</span><span class="brand-ai">AI</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Analyze</a>
+            <a href="history.html" class="nav-link active">History</a>
+            <a href="stats.html" class="nav-link">Stats</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="page-hero">
+            <h1>Prediction History</h1>
+            <p>All past face analyses stored in the database.</p>
+        </div>
+
+        <div class="table-card">
+            <div class="table-head">
+                <h3>Recent Predictions</h3>
+                <span class="badge" id="total-badge">—</span>
+            </div>
+
+            <!-- Loading -->
+            <div class="loading-msg" id="loading-msg">
+                <div class="inline-spinner"></div> Loading…
+            </div>
+
+            <!-- DB / server error -->
+            <div class="error-msg" id="error-msg" style="display:none;">
+                <div class="error-icon">⚠️</div>
+                <p class="error-title">Could not load history</p>
+                <p class="error-detail" id="error-text"></p>
+                <ul class="error-tips">
+                    <li>Make sure <code>node server.js</code> is running</li>
+                    <li>Check MySQL is running and credentials in <code>server.js</code> are correct</li>
+                    <li>Run the SQL setup script: <code>mysql -u root -p &lt; setup_database.sql</code></li>
+                </ul>
+                <button class="btn-retry-load" onclick="load()">↺ Retry</button>
+            </div>
+
+            <!-- Table -->
+            <div id="table-wrap" style="display:none; overflow-x:auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>File</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Confidence</th>
+                            <th>Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+
+            <!-- Empty state -->
+            <div class="empty-msg" id="empty-msg" style="display:none;">
+                No predictions yet. <a href="index.html">Analyze your first face →</a>
+            </div>
+
+            <div class="pagination" id="pagination"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>FaceAnalyzer AI · Powered by MobileNetV2, TensorFlow & face-api.js</p>
+    </footer>
+
+    <script src="js/history.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics · FaceAnalyzer AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="brand-dot"></div>
+            <span>FaceAnalyzer</span><span class="brand-ai">AI</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Analyze</a>
+            <a href="history.html" class="nav-link">History</a>
+            <a href="stats.html" class="nav-link active">Stats</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="page-hero">
+            <h1>Usage Statistics</h1>
+            <p>Insights from all your predictions.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-icon">🔍</div><div class="stat-num" id="s-total">—</div><div class="stat-lbl">Total Predictions</div></div>
+            <div class="stat-card"><div class="stat-icon">🎂</div><div class="stat-num" id="s-avg">—</div><div class="stat-lbl">Avg Age Predicted</div></div>
+            <div class="stat-card"><div class="stat-icon">👨</div><div class="stat-num" id="s-male">—</div><div class="stat-lbl">Males Detected</div></div>
+            <div class="stat-card"><div class="stat-icon">👩</div><div class="stat-num" id="s-female">—</div><div class="stat-lbl">Females Detected</div></div>
+            <div class="stat-card"><div class="stat-icon">⬇️</div><div class="stat-num" id="s-min">—</div><div class="stat-lbl">Youngest Predicted</div></div>
+            <div class="stat-card"><div class="stat-icon">⬆️</div><div class="stat-num" id="s-max">—</div><div class="stat-lbl">Oldest Predicted</div></div>
+        </div>
+
+        <div class="gender-chart">
+            <h3>Gender Distribution</h3>
+            <div class="g-bar-row">
+                <span class="g-bar-label">♂ Male</span>
+                <div class="g-bar">
+                    <div class="g-bar-male" id="g-male-fill"></div>
+                    <div class="g-bar-female" id="g-female-fill"></div>
+                </div>
+                <span class="g-bar-label" style="text-align:right">Female ♀</span>
+            </div>
+            <div class="g-bar-pcts">
+                <span id="g-male-pct">—</span>
+                <span id="g-female-pct">—</span>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>FaceAnalyzer AI · Powered by MobileNetV2, TensorFlow & face-api.js</p>
+    </footer>
+
+    <script src="js/stats.js"></script>
+</body>
+</html>
