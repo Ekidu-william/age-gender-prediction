@@ -3,22 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>History · FaceAnalyzer AI</title>
+    <title>History · AgeVision AI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-brand">
-            <div class="brand-dot"></div>
-            <span>FaceAnalyzer</span><span class="brand-ai">AI</span>
+    <div class="settings-overlay" id="settings-overlay"></div>
+
+    <aside class="settings-panel" id="settings-panel" role="dialog" aria-label="Settings">
+        <div class="settings-header">
+            <span class="settings-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+                Settings
+            </span>
+            <button class="btn-close-settings" id="btn-close-settings" aria-label="Close settings">✕</button>
         </div>
+        <div class="settings-body">
+            <div>
+                <p class="settings-section-label">Appearance</p>
+                <div class="theme-options">
+                    <button class="theme-option active" data-theme-choice="dark" aria-pressed="true">
+                        <div class="theme-preview tp-dark"></div>
+                        <span class="theme-option-name"><span class="theme-check">✓</span> Dark</span>
+                    </button>
+                    <button class="theme-option" data-theme-choice="light" aria-pressed="false">
+                        <div class="theme-preview tp-light"></div>
+                        <span class="theme-option-name"><span class="theme-check">✓</span> Light</span>
+                    </button>
+                </div>
+            </div>
+            <div>
+                <p class="settings-section-label">About</p>
+                <div class="settings-info">
+                    <strong>AgeVision AI</strong><br>
+                    Face detection via face-api.js · Age & gender prediction via MobileNetV2 · TensorFlow backend
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <div class="brand-dot"></div>
+            <span>AgeVision</span><span class="brand-ai">AI</span>
+        </a>
         <div class="nav-links">
             <a href="index.html" class="nav-link">Analyze</a>
             <a href="history.html" class="nav-link active">History</a>
             <a href="stats.html" class="nav-link">Stats</a>
+        </div>
+        <div class="nav-right">
+            <button class="btn-settings" id="btn-settings" aria-label="Open settings" title="Settings">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </button>
+            <button class="btn-hamburger" id="btn-hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div class="nav-drawer" id="nav-drawer">
+            <a href="index.html" class="nav-link">Analyze</a>
+            <a href="history.html" class="nav-link active">History</a>
+            <a href="stats.html" class="nav-link">Stats</a>
+            <div class="nav-drawer-divider"></div>
+            <a href="#" class="nav-link" id="drawer-settings-link">⚙ Settings</a>
         </div>
     </nav>
 
@@ -33,13 +82,7 @@
                 <h3>Recent Predictions</h3>
                 <span class="badge" id="total-badge">—</span>
             </div>
-
-            <!-- Loading -->
-            <div class="loading-msg" id="loading-msg">
-                <div class="inline-spinner"></div> Loading…
-            </div>
-
-            <!-- DB / server error -->
+            <div class="loading-msg" id="loading-msg"><div class="inline-spinner"></div> Loading…</div>
             <div class="error-msg" id="error-msg" style="display:none;">
                 <div class="error-icon">⚠️</div>
                 <p class="error-title">Could not load history</p>
@@ -47,12 +90,10 @@
                 <ul class="error-tips">
                     <li>Make sure <code>node server.js</code> is running</li>
                     <li>Check MySQL is running and credentials in <code>server.js</code> are correct</li>
-                    <li>Run the SQL setup script: <code>mysql -u root -p &lt; setup_database.sql</code></li>
+                    <li>Run the SQL setup: <code>mysql -u root -p &lt; setup_database.sql</code></li>
                 </ul>
                 <button class="btn-retry-load" onclick="load()">↺ Retry</button>
             </div>
-
-            <!-- Table -->
             <div id="table-wrap" style="display:none; overflow-x:auto;">
                 <table class="data-table">
                     <thead>
@@ -69,20 +110,19 @@
                     <tbody id="table-body"></tbody>
                 </table>
             </div>
-
-            <!-- Empty state -->
             <div class="empty-msg" id="empty-msg" style="display:none;">
                 No predictions yet. <a href="index.html">Analyze your first face →</a>
             </div>
-
             <div class="pagination" id="pagination"></div>
         </div>
     </main>
 
     <footer class="footer">
-        <p>FaceAnalyzer AI · Powered by MobileNetV2, TensorFlow & face-api.js</p>
+        <p>Disclaimer: "Age is estimated. Results may vary based on image quality"</p>
+        <p>AgeVision AI · Powered by MobileNetV2, TensorFlow & face-api.js</p>
     </footer>
 
+    <script src="js/theme.js"></script>
     <script src="js/history.js"></script>
 </body>
 </html>

@@ -3,22 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FaceAnalyzer AI</title>
+    <title>AgeVision AI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-brand">
-            <div class="brand-dot"></div>
-            <span>FaceAnalyzer</span><span class="brand-ai">AI</span>
+    <!-- SETTINGS OVERLAY -->
+    <div class="settings-overlay" id="settings-overlay"></div>
+
+    <!-- SETTINGS PANEL -->
+    <aside class="settings-panel" id="settings-panel" role="dialog" aria-label="Settings">
+        <div class="settings-header">
+            <span class="settings-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+                Settings
+            </span>
+            <button class="btn-close-settings" id="btn-close-settings" aria-label="Close settings">✕</button>
         </div>
+        <div class="settings-body">
+
+            <div>
+                <p class="settings-section-label">Appearance</p>
+                <div class="theme-options">
+                    <button class="theme-option active" data-theme-choice="dark" aria-pressed="true">
+                        <div class="theme-preview tp-dark"></div>
+                        <span class="theme-option-name">
+                            <span class="theme-check">✓</span>
+                            Dark
+                        </span>
+                    </button>
+                    <button class="theme-option" data-theme-choice="light" aria-pressed="false">
+                        <div class="theme-preview tp-light"></div>
+                        <span class="theme-option-name">
+                            <span class="theme-check">✓</span>
+                            Light
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <p class="settings-section-label">About</p>
+                <div class="settings-info">
+                    <strong>AgeVision AI</strong><br>
+                    Face detection via face-api.js · Age & gender prediction via MobileNetV2 · TensorFlow backend
+                </div>
+            </div>
+
+        </div>
+    </aside>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <div class="brand-dot"></div>
+            <span>AgeVision</span><span class="brand-ai">AI</span>
+        </a>
+
+        <!-- Desktop links -->
         <div class="nav-links">
             <a href="index.html" class="nav-link active">Analyze</a>
             <a href="history.html" class="nav-link">History</a>
             <a href="stats.html" class="nav-link">Stats</a>
+        </div>
+
+        <div class="nav-right">
+            <!-- Settings button -->
+            <button class="btn-settings" id="btn-settings" aria-label="Open settings" title="Settings">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </button>
+            <!-- Hamburger (mobile) -->
+            <button class="btn-hamburger" id="btn-hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+
+        <!-- Mobile drawer -->
+        <div class="nav-drawer" id="nav-drawer">
+            <a href="index.html" class="nav-link active">Analyze</a>
+            <a href="history.html" class="nav-link">History</a>
+            <a href="stats.html" class="nav-link">Stats</a>
+            <div class="nav-drawer-divider"></div>
+            <a href="#" class="nav-link" id="drawer-settings-link">⚙ Settings</a>
         </div>
     </nav>
 
@@ -43,7 +111,6 @@
 
         <section class="workspace" id="workspace">
 
-            <!-- TAB BAR -->
             <div class="tab-bar">
                 <button class="tab-btn active" data-tab="upload">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
@@ -74,7 +141,6 @@
             <!-- CAMERA TAB -->
             <div class="tab-panel" id="tab-camera">
                 <div class="camera-panel">
-
                     <div class="cam-idle" id="cam-idle">
                         <div class="cam-big-icon">
                             <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
@@ -83,16 +149,13 @@
                         <p class="cam-idle-sub">Center your face in the frame and tap capture.</p>
                         <button class="btn-open-cam" id="btn-open-cam">Open Camera</button>
                     </div>
-
                     <div class="cam-live" id="cam-live" style="display:none;">
                         <div class="video-wrap">
                             <video id="cam-video" autoplay muted playsinline></video>
                             <canvas id="cam-overlay" class="cam-overlay-canvas"></canvas>
                             <div class="face-guide">
-                                <div class="guide-corner c-tl"></div>
-                                <div class="guide-corner c-tr"></div>
-                                <div class="guide-corner c-bl"></div>
-                                <div class="guide-corner c-br"></div>
+                                <div class="guide-corner c-tl"></div><div class="guide-corner c-tr"></div>
+                                <div class="guide-corner c-bl"></div><div class="guide-corner c-br"></div>
                             </div>
                             <p class="live-hint" id="live-hint">Center your face · Keep still</p>
                         </div>
@@ -103,13 +166,11 @@
                             <button class="btn-cancel-cam" id="btn-cancel-cam">✕ Close Camera</button>
                         </div>
                     </div>
-
                 </div>
             </div>
 
-            <!-- PREVIEW + FACE DETECTION (shared) -->
+            <!-- PREVIEW PANEL -->
             <div class="preview-panel" id="preview-panel" style="display:none;">
-
                 <div class="preview-cols">
                     <div class="preview-col">
                         <p class="col-label">Original Photo</p>
@@ -123,25 +184,20 @@
                         <p class="col-label">Cropped Face <em>200×200</em></p>
                         <div class="crop-wrap">
                             <canvas id="crop-canvas" width="200" height="200"></canvas>
-                            <div class="scan-anim" id="scan-anim">
-                                <div class="scan-line"></div>
-                            </div>
+                            <div class="scan-anim" id="scan-anim"><div class="scan-line"></div></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Status row -->
                 <div class="det-status" id="det-status">
-                    <div id="st-loading" class="st st-loading">
-                        <span class="st-spinner"></span> Detecting face…
-                    </div>
+                    <div id="st-loading" class="st st-loading"><span class="st-spinner"></span> Detecting face…</div>
                     <div id="st-ok" class="st st-ok" style="display:none;">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                         Face detected · Ready to analyze
                     </div>
                     <div id="st-err" class="st st-err" style="display:none;">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                        <span id="st-err-msg">No face detected. Try a clearer photo.</span>
+                        <span id="st-err-msg">No face detected.</span>
                     </div>
                 </div>
 
@@ -152,7 +208,6 @@
                     </button>
                     <button class="btn-try-again" id="btn-try-again">↩ Try Another</button>
                 </div>
-
             </div>
 
         </section>
@@ -160,7 +215,6 @@
         <!-- RESULTS -->
         <section class="results-section" id="results-section" style="display:none;">
             <div class="results-card">
-
                 <div class="res-header">
                     <canvas id="res-thumb" width="80" height="80" class="res-thumb"></canvas>
                     <div>
@@ -168,7 +222,6 @@
                         <h2 class="res-title">Prediction Results</h2>
                     </div>
                 </div>
-
                 <div class="res-metrics">
                     <div class="metric age-metric">
                         <div class="metric-num" id="res-age">—</div>
@@ -180,7 +233,6 @@
                         <div class="metric-label" id="res-gender-sub">gender</div>
                     </div>
                 </div>
-
                 <div class="conf-wrap">
                     <div class="conf-row">
                         <span class="conf-pole">♂ Male</span>
@@ -190,14 +242,9 @@
                         </div>
                         <span class="conf-pole">Female ♀</span>
                     </div>
-                    <div class="conf-pcts">
-                        <span id="pct-male">—</span>
-                        <span id="pct-female">—</span>
-                    </div>
+                    <div class="conf-pcts"><span id="pct-male">—</span><span id="pct-female">—</span></div>
                 </div>
-
                 <button class="btn-again" id="btn-again">Analyze Another Face</button>
-
             </div>
         </section>
 
@@ -206,12 +253,13 @@
     <div class="toast" id="toast"></div>
 
     <footer class="footer">
-        <p>FaceAnalyzer AI · Powered by MobileNetV2, TensorFlow & face-api.js</p>
+        <p>Disclaimer: "Age is estimated. Results may vary based on image quality"</p>
+        <p>AgeVision AI · Powered by MobileNetV2, TensorFlow & face-api.js</p>
     </footer>
 
-    <!-- face-api.js loaded from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
     <script src="js/face-detect.js"></script>
+    <script src="js/theme.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

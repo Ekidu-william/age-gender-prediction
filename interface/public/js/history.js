@@ -38,7 +38,7 @@ async function load(page = 1) {
                 <td><span class="g-badge g-${p.predicted_gender.toLowerCase()}">${esc(p.predicted_gender)}</span></td>
                 <td>${parseFloat(p.gender_confidence).toFixed(1)}%</td>
                 <td class="date-cell">${formatDate(p.created_at)}</td>
-                <td><button class="btn-del" onclick="del(${p.id}, this)">🗑</button></td>
+                <td><button class="btn-del" onclick="del(${p.id}, this)">🗑🗑️</button></td>
             </tr>
         `).join('');
 
