@@ -1,8 +1,8 @@
-# FaceAnalyzer AI
+# AgeVision AI
 
 > Predict a person's **age** and **gender** from a facial photo using deep learning.
 
-A full-stack application with a MobileNetV2-based TensorFlow model on the backend and a Node.js + MySQL web interface on the frontend. Face detection and cropping happen entirely in the browser using **face-api.js** — only the clean, cropped 200×200 face is ever sent to the prediction server.
+A full-stack application with a MobileNetV2-based TensorFlow model on the backend and a Node.js + MySQL web interface on the frontend. Face detection and cropping happen entirely in the browser using **face-api.js**  only the clean, cropped 200×200 face is ever sent to the prediction server.
 
 ---
 
@@ -10,22 +10,22 @@ A full-stack application with a MobileNetV2-based TensorFlow model on the backen
 
 | Dark Mode | Light Mode |
 |-----------|------------|
-| *.assets\screenshots\AgeVisionDarkMode.png* | *.assets\screenshots\AgeVisionLightMode.png* |
+|![App Screenshot](./assets/screenshots/AgeVisionDarkMode.png) | ![App Screenshot](./assets/screenshots/AgeVisionLightMode.png)|
 
 ---
 
 ## Features
 
--  **Three input methods** — drag & drop, file browser, or live camera/selfie
--  **In-browser face detection** — powered by face-api.js (TinyFaceDetector + SSD MobileNetV1)
--  **Auto crop & resize** — detects the face, crops it with padding, resizes to exactly 200×200px
--  **Error on no face** — rejects images where no face is detected
--  **Age prediction** — regression model, typical error ±5–8 years
--  **Gender prediction** — binary classification, typical accuracy 88–93%
--  **Dark / Light mode** — persistent theme preference saved to localStorage
--  **Fully responsive** — hamburger menu on mobile, adaptive layouts at 768px and 600px
--  **History & Statistics** — all predictions saved to MySQL, viewable in the web UI
--  **Environment config** — credentials managed via `.env`, never hardcoded
+  **Three input methods**  drag & drop, file browser, or live camera/selfie
+  **In-browser face detection**  powered by face-api.js (TinyFaceDetector + SSD MobileNetV1)
+  **Auto crop & resize**  detects the face, crops it with padding, resizes to exactly 200×200px
+  **Error on no face**  rejects images where no face is detected
+  **Age prediction**  regression model, typical error ±5–8 years
+  **Gender prediction**  binary classification, typical accuracy 88–93%
+  **Dark / Light mode**  persistent theme preference saved to localStorage
+  **Fully responsive**  hamburger menu on mobile, adaptive layouts at 768px and 600px
+  **History & Statistics**  all predictions saved to MySQL, viewable in the web UI
+  **Environment config**  credentials managed via `.env`, never hardcoded
 
 ---
 
@@ -92,14 +92,14 @@ age-gender-prediction/
 
 ## Installation & Setup
 
-### 1 — Clone the repository
+### 1  Clone the repository
 
 ```bash
 git clone https://github.com/Ekidu-William/age-gender-prediction.git
 cd age-gender-prediction
 ```
 
-### 2 — Install Python dependencies
+### 2  Install Python dependencies
 
 ```bash
 pip install tensorflow pandas numpy scikit-learn matplotlib pillow flask flask-cors
@@ -107,14 +107,14 @@ pip install tensorflow pandas numpy scikit-learn matplotlib pillow flask flask-c
 
 > **GPU users:** replace `tensorflow` with `tensorflow-gpu` for significantly faster training.
 
-### 3 — Install Node.js dependencies
+### 3  Install Node.js dependencies
 
 ```bash
 cd interface
 npm install
 ```
 
-### 4 — Download face detection model weights
+### 4  Download face detection model weights
 
 This downloads ~6 MB of weight files into `public/models/`. Only needs to be done once.
 
@@ -122,7 +122,7 @@ This downloads ~6 MB of weight files into `public/models/`. Only needs to be don
 node download_models.js
 ```
 
-### 5 — Configure environment variables
+### 5  Configure environment variables
 
 ```bash
 cp .env.example .env
@@ -141,7 +141,7 @@ DB_NAME=age_gender_db
 DB_PORT=3306
 ```
 
-### 6 — Set up the MySQL database
+### 6  Set up the MySQL database
 
 ```bash
 mysql -u root -p < setup_database.sql
@@ -153,7 +153,7 @@ Or paste the contents of `setup_database.sql` into MySQL Workbench / phpMyAdmin 
 
 ## Training the Model
 
-### Step 1 — Prepare CSVs from your image dataset
+### Step 1  Prepare CSVs from your image dataset
 
 Your images must follow the UTKFace naming convention:
 
@@ -175,7 +175,7 @@ python step1_prepare_csv.py --images_dir /path/to/your/images
 
 This creates `train.csv` (80%) and `test.csv` (20%) with an even gender split.
 
-### Step 2 — Train the model
+### Step 2  Train the model
 
 ```bash
 python step2_train_model.py
@@ -190,7 +190,7 @@ Training runs for 10 epochs. A progress graph is saved to `training_history.png`
 
 > To reduce memory usage, lower `BATCH_SIZE` from `32` to `16` inside `step2_train_model.py`.
 
-### Step 3 — Evaluate the model (optional)
+### Step 3  Evaluate the model (optional)
 
 ```bash
 # Test on a single image
@@ -212,9 +212,9 @@ python step3_test_model.py --evaluate
 
 ## Running the Application
 
-Two servers must run simultaneously — open **two terminal windows**.
+Two servers must run simultaneously  open **two terminal windows**.
 
-**Terminal 1 — Python prediction API:**
+**Terminal 1  Python prediction API:**
 
 ```bash
 cd model
@@ -226,7 +226,7 @@ python step4_prediction_api.py
  Prediction API starting on http://localhost:5001
 ```
 
-**Terminal 2 — Node.js web interface:**
+**Terminal 2  Node.js web interface:**
 
 ```bash
 cd interface
@@ -258,8 +258,8 @@ Open **http://localhost:3000** in your browser.
 
 Click the **⚙ gear icon** in the top-right navbar to open the Settings panel:
 
-- **Dark mode** (default) — high-contrast dark theme
-- **Light mode** — clean light theme
+- **Dark mode** (default)  high-contrast dark theme
+- **Light mode**  clean light theme
 
 The preference is saved automatically and persists across all pages and sessions.
 
@@ -274,14 +274,14 @@ The Flask prediction API exposes these endpoints:
 | `GET` | `/health` | Check if API is running and model is loaded |
 | `POST` | `/predict` | Submit an image, receive age + gender prediction |
 
-**POST `/predict` — request:**
+**POST `/predict`  request:**
 
 ```
 Content-Type: multipart/form-data
 Body: image (file)
 ```
 
-**POST `/predict` — response:**
+**POST `/predict`  response:**
 
 ```json
 {
