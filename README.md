@@ -10,22 +10,22 @@ A full-stack application with a MobileNetV2-based TensorFlow model on the backen
 
 | Dark Mode | Light Mode |
 |-----------|------------|
-| *(Upload / analyze screen)* | *(Light theme via Settings panel)* |
+| *.assets\screenshots\AgeVisionDarkMode.png* | *.assets\screenshots\AgeVisionLightMode.png* |
 
 ---
 
 ## Features
 
-- 📸 **Three input methods** — drag & drop, file browser, or live camera/selfie
-- 🧠 **In-browser face detection** — powered by face-api.js (TinyFaceDetector + SSD MobileNetV1)
-- ✂️ **Auto crop & resize** — detects the face, crops it with padding, resizes to exactly 200×200px
-- ❌ **Error on no face** — rejects images where no face is detected
-- 🎂 **Age prediction** — regression model, typical error ±5–8 years
-- 👤 **Gender prediction** — binary classification, typical accuracy 88–93%
-- 🌗 **Dark / Light mode** — persistent theme preference saved to localStorage
-- 📱 **Fully responsive** — hamburger menu on mobile, adaptive layouts at 768px and 600px
-- 🗄️ **History & Statistics** — all predictions saved to MySQL, viewable in the web UI
-- 🔐 **Environment config** — credentials managed via `.env`, never hardcoded
+-  **Three input methods** — drag & drop, file browser, or live camera/selfie
+-  **In-browser face detection** — powered by face-api.js (TinyFaceDetector + SSD MobileNetV1)
+-  **Auto crop & resize** — detects the face, crops it with padding, resizes to exactly 200×200px
+-  **Error on no face** — rejects images where no face is detected
+-  **Age prediction** — regression model, typical error ±5–8 years
+-  **Gender prediction** — binary classification, typical accuracy 88–93%
+-  **Dark / Light mode** — persistent theme preference saved to localStorage
+-  **Fully responsive** — hamburger menu on mobile, adaptive layouts at 768px and 600px
+-  **History & Statistics** — all predictions saved to MySQL, viewable in the web UI
+-  **Environment config** — credentials managed via `.env`, never hardcoded
 
 ---
 
@@ -95,7 +95,7 @@ age-gender-prediction/
 ### 1 — Clone the repository
 
 ```bash
-git clone https://github.com/your-username/age-gender-prediction.git
+git clone https://github.com/Ekidu-William/age-gender-prediction.git
 cd age-gender-prediction
 ```
 
@@ -222,8 +222,8 @@ python step4_prediction_api.py
 ```
 
 ```
-✅ Model loaded successfully!
-🚀 Prediction API starting on http://localhost:5001
+ Model loaded successfully!
+ Prediction API starting on http://localhost:5001
 ```
 
 **Terminal 2 — Node.js web interface:**
@@ -234,8 +234,8 @@ node server.js
 ```
 
 ```
-✅ Connected to MySQL database
-🚀 Web interface running at http://localhost:3000
+ Connected to MySQL database
+ Web interface running at http://localhost:3000
 ```
 
 Open **http://localhost:3000** in your browser.
