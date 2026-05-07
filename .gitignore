@@ -12,7 +12,6 @@ data/
 *.webp
 
 # ── Trained model files (large binary files) ────────────────
-*.h5
 *.keras
 *.pt
 *.pth

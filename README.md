@@ -11,6 +11,8 @@ A full-stack application with a MobileNetV2-based TensorFlow model on the backen
 | Dark Mode | Light Mode |
 |-----------|------------|
 |![App Screenshot](./assets/screenshots/AgeVisionDarkMode.png) | ![App Screenshot](./assets/screenshots/AgeVisionLightMode.png)|
+|![App Screenshot](./assets/screenshots/Prediction_results.png) | ![App Screenshot](./assets/screenshots/Prediction_result.png)|
+|![App Screenshot](./assets/screenshots/history.png) | ![App Screenshot](./assets/screenshots/stats.png)|
 
 ---
 
