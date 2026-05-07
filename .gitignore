@@ -8,7 +8,6 @@ dataset/
 data/
 *.jpg
 *.jpeg
-*.png
 *.webp
 
 # ── Trained model files (large binary files) ────────────────
